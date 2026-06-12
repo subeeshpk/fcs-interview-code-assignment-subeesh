@@ -9,15 +9,30 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class ReplaceWarehouseUseCase implements ReplaceWarehouseOperation {
 
   private final WarehouseStore warehouseStore;
+  private final ArchiveWarehouseOperation archiveWarehouseOperation;
 
-  public ReplaceWarehouseUseCase(WarehouseStore warehouseStore) {
+  public ReplaceWarehouseUseCase(WarehouseStore warehouseStore, ArchiveWarehouseOperation archiveWarehouseOperation) {
     this.warehouseStore = warehouseStore;
+    this.archiveWarehouseOperation = archiveWarehouseOperation;
   }
 
   @Override
   public void replace(Warehouse newWarehouse) {
-    // TODO implement this method
+    Warehouse existing = warehouseStore.findByBusinessUnitCode(newWarehouse.businessUnitCode);
+    if (existing == null) {
+      throw new IllegalArgumentException("No active warehouse found with code " + newWarehouse.businessUnitCode + ".");
+    }
 
-    warehouseStore.update(newWarehouse);
+    if (newWarehouse.capacity < existing.stock) {
+      throw new IllegalArgumentException("New capacity must be >= existing stock of " + existing.stock + ".");
+    }
+
+    if (!newWarehouse.stock.equals(existing.stock)) {
+      throw new IllegalArgumentException("New stock must match existing stock of " + existing.stock + ".");
+    }
+
+    archiveWarehouseOperation.archive(existing);
+    warehouseStore.create(newWarehouse);
+  }
   }
 }

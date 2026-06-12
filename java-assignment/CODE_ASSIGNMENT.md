@@ -52,29 +52,29 @@ The following validations and constraints should be applied and a proper respons
 **Business Unit Code Verification**
 
 Ensure that the specified business unit code for the warehouse doesn't already exists.
-
+### Code changes completed.
 **Location Validation**
 
 Confirm that the warehouse location is valid, meaning it must be an existing valid location.
-
+### Code changes completed.
 **Warehouse Creation Feasibility**
 
 Check if a new warehouse can be created at the specified location or if the maximum number of warehouses has already been reached.
-
+### Code changes completed.
 **Capacity and Stock Validation** 
 
 Validate the warehouse capacity, ensuring it does not exceed the maximum capacity associated with the location and that it can handle the stock informed.
-
+### Code changes completed.
 #### Additional Validations for Replacing a Warehouse
 
 **Capacity Accommodation**
-
+### Code changes completed.
 Ensure the new warehouse's capacity can accommodate the stock from the warehouse being replaced.
-
+### Code changes completed.
 **Stock Matching**
 
 Confirm that the stock of the new warehouse matches the stock of the previous warehouse.
-
+### Code changes completed.
 ## BONUS task (nice to have)
 
 Implement the feature of associating `Warehouses` as fullfilment units of certain `Products` to determined `Stores`.
@@ -86,3 +86,5 @@ Constraints:
 2. Each `Store` can be fulfilled by a maximum of 3 different `Warehouses`
 
 3. Each `Warehouse` can store maximally 5 types of `Products`
+
+### Not implemented due to time constraints.

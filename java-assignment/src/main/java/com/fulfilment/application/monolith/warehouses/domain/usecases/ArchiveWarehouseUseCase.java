@@ -16,8 +16,7 @@ public class ArchiveWarehouseUseCase implements ArchiveWarehouseOperation {
 
   @Override
   public void archive(Warehouse warehouse) {
-    // TODO implement this method
-
+    warehouse.archivedAt = LocalDateTime.now();
     warehouseStore.update(warehouse);
   }
 }
