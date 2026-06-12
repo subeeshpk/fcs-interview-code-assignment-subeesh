@@ -34,5 +34,4 @@ public class ReplaceWarehouseUseCase implements ReplaceWarehouseOperation {
     archiveWarehouseOperation.archive(existing);
     warehouseStore.create(newWarehouse);
   }
-  }
 }
