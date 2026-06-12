@@ -3,6 +3,7 @@ package com.fulfilment.application.monolith.warehouses.domain.usecases;
 import com.fulfilment.application.monolith.warehouses.domain.models.Warehouse;
 import com.fulfilment.application.monolith.warehouses.domain.ports.ReplaceWarehouseOperation;
 import com.fulfilment.application.monolith.warehouses.domain.ports.WarehouseStore;
+import com.fulfilment.application.monolith.warehouses.domain.ports.ArchiveWarehouseOperation;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped

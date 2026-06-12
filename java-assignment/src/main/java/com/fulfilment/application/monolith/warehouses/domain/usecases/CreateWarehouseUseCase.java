@@ -4,6 +4,10 @@ import com.fulfilment.application.monolith.warehouses.domain.models.Warehouse;
 import com.fulfilment.application.monolith.warehouses.domain.ports.CreateWarehouseOperation;
 import com.fulfilment.application.monolith.warehouses.domain.ports.WarehouseStore;
 import jakarta.enterprise.context.ApplicationScoped;
+import com.fulfilment.application.monolith.warehouses.domain.models.Location;
+import com.fulfilment.application.monolith.warehouses.domain.ports.LocationResolver;
+import java.util.List;
+import java.util.ArrayList;
 
 @ApplicationScoped
 public class CreateWarehouseUseCase implements CreateWarehouseOperation {

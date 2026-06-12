@@ -5,6 +5,7 @@ import com.fulfilment.application.monolith.warehouses.domain.ports.WarehouseStor
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.List;
+import java.time.LocalDateTime;
 
 @ApplicationScoped
 public class WarehouseRepository implements WarehouseStore, PanacheRepository<DbWarehouse> {
