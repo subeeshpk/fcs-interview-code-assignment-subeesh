@@ -44,8 +44,9 @@ after it is effectively stored in our database.
 
 #### Implement Warehouse Creation, Replacement and Archive logic (Must have)
 
-Locate and implement the API endpoints handlers and Use Cases for all Warehouse related operations, like creating, retrieveing, replacing and archiving. 
-
+Locate and implement the API endpoints handlers and Use Cases for all Warehouse related operations, 
+like creating, retrieveing, replacing and archiving. 
+### Code changes completed.
 The following validations and constraints should be applied and a proper response should be returned to the users:
 
 **Business Unit Code Verification**

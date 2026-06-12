@@ -11,30 +11,36 @@ public class WarehouseRepository implements WarehouseStore, PanacheRepository<Db
 
   @Override
   public List<Warehouse> getAll() {
-    return this.listAll().stream().map(DbWarehouse::toWarehouse).toList();
+    return find("archivedAt is null").stream().map(DbWarehouse::toWarehouse).toList();
   }
 
   @Override
   public void create(Warehouse warehouse) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'create'");
+    DbWarehouse db = new DbWarehouse();
+    db.businessUnitCode = warehouse.businessUnitCode;
+    db.location = warehouse.location;
+    db.capacity = warehouse.capacity;
+    db.stock = warehouse.stock;
+    db.createdAt = LocalDateTime.now();
+    persist(db);
   }
 
   @Override
   public void update(Warehouse warehouse) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'replace'");
+    DbWarehouse db = find("businessUnitCode", warehouse.businessUnitCode).firstResult();
+    db.capacity = warehouse.capacity;
+    db.stock = warehouse.stock;
+    db.archivedAt = warehouse.archivedAt;
   }
 
   @Override
   public void remove(Warehouse warehouse) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'remove'");
+    delete("businessUnitCode", warehouse.businessUnitCode);
   }
 
   @Override
   public Warehouse findByBusinessUnitCode(String buCode) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findById'");
+    DbWarehouse db = find("businessUnitCode = ?1 and archivedAt is null", buCode).firstResult();
+    return db != null ? db.toWarehouse() : null;
   }
 }
