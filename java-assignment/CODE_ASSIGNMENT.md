@@ -18,6 +18,8 @@ Also, just a minimum set of tests are present, feel free to bring more as well t
 
 On the class `LocationGateway`, implement the method `resolveByIdentifier`. We advise you to start by this one as this is the most simple and is a pre-requirement for the next tasks. This is just a warm-up task 😃
 
+Code changes completed and implemeted `resolveByIdentifier` method.
+
 ### 2. Store (Must have)
 
 > this code is located under package `com.fulfilment.application.monolith.stores`
