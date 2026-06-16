@@ -1,3 +1,6 @@
+## Status
+![CI](https://github.com/subeeshpk/fcs-interview-code-assignment-subeesh/actions/workflows/ci.yml/badge.svg)
+
 # Java Code Assignment
 
 This is a short code assignment that explores various aspects of software development, including API implementation, documentation, persistence layer handling, and testing.
@@ -85,3 +88,4 @@ Have fun, and join the team of contributors!
 ## Troubleshooting
 
 Using **IntelliJ**, in case the generated code is not recognized and you have compilation failures, you may need to add `target/.../jaxrs` folder as "generated sources".
+
