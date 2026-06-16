@@ -28,12 +28,11 @@ public class WarehouseResourceImpl implements WarehouseResource {
 
   @Override
   public Warehouse createANewWarehouseUnit(@NotNull Warehouse data) {
-    com.fulfilment.application.monolith.warehouses.domain.models.Warehouse warehouse = toDomainWarehouse(data);
-    try {
-      createWarehouseOperation.create(warehouse);
-    } catch (IllegalArgumentException e) {
-      throw new WebApplicationException(e.getMessage(), 400);
+    if (data == null) {
+      throw new IllegalArgumentException("Request body must not be null.");
     }
+    com.fulfilment.application.monolith.warehouses.domain.models.Warehouse warehouse = toDomainWarehouse(data);
+    createWarehouseOperation.create(warehouse);
     return toApiWarehouse(warehouse);
   }
 
@@ -57,13 +56,12 @@ public class WarehouseResourceImpl implements WarehouseResource {
 
   @Override
   public Warehouse replaceTheCurrentActiveWarehouse(String businessUnitCode, @NotNull Warehouse data) {
+    if (data == null) {
+      throw new IllegalArgumentException("Request body must not be null.");
+    }
     com.fulfilment.application.monolith.warehouses.domain.models.Warehouse newWarehouse = toDomainWarehouse(data);
     newWarehouse.businessUnitCode = businessUnitCode;
-    try {
-      replaceWarehouseOperation.replace(newWarehouse);
-    } catch (IllegalArgumentException e) {
-      throw new WebApplicationException(e.getMessage(), 400);
-    }
+    replaceWarehouseOperation.replace(newWarehouse);
     return toApiWarehouse(newWarehouse);
   }
 

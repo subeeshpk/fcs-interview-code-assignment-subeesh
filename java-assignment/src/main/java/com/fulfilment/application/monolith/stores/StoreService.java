@@ -1,16 +1,21 @@
 package com.fulfilment.application.monolith.stores;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.WebApplicationException;
-import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class StoreService {
 
+    @Inject Event<StoreCreatedEvent> storeCreatedEvent;
+    @Inject Event<StoreUpdatedEvent> storeUpdatedEvent;
+
     @Transactional
     public void save(Store store) {
         store.persist();
+        storeCreatedEvent.fire(new StoreCreatedEvent(store));
     }
 
     @Transactional
@@ -21,6 +26,7 @@ public class StoreService {
         }
         entity.name = updatedStore.name;
         entity.quantityProductsInStock = updatedStore.quantityProductsInStock;
+        storeUpdatedEvent.fire(new StoreUpdatedEvent(entity));
         return entity;
     }
 
@@ -36,6 +42,7 @@ public class StoreService {
         if (updatedStore.quantityProductsInStock != 0) {
             entity.quantityProductsInStock = updatedStore.quantityProductsInStock;
         }
+        storeUpdatedEvent.fire(new StoreUpdatedEvent(entity));
         return entity;
     }
 

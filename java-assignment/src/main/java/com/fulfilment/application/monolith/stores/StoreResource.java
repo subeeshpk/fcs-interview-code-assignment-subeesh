@@ -27,7 +27,6 @@ import org.jboss.logging.Logger;
 @Consumes("application/json")
 public class StoreResource {
 
-  @Inject LegacyStoreManagerGateway legacyStoreManagerGateway;
   @Inject StoreService storeService;
 
   private static final Logger LOGGER = Logger.getLogger(StoreResource.class.getName());
@@ -53,7 +52,6 @@ public class StoreResource {
       throw new WebApplicationException("Id was invalidly set on request.", 422);
     }
     storeService.save(store);
-    legacyStoreManagerGateway.createStoreOnLegacySystem(store);
     return Response.ok(store).status(201).build();
   }
 
@@ -63,9 +61,7 @@ public class StoreResource {
     if (updatedStore.name == null) {
       throw new WebApplicationException("Store Name was not set on request.", 422);
     }
-    Store updated = storeService.update(id, updatedStore);
-    legacyStoreManagerGateway.updateStoreOnLegacySystem(updated);
-    return updated;
+    return storeService.update(id, updatedStore);
   }
 
   @PATCH
@@ -74,9 +70,7 @@ public class StoreResource {
     if (updatedStore.name == null) {
       throw new WebApplicationException("Store Name was not set on request.", 422);
     }
-    Store patched = storeService.patch(id, updatedStore);
-    legacyStoreManagerGateway.updateStoreOnLegacySystem(patched);
-    return patched;
+    return storeService.patch(id, updatedStore);
   }
 
   @DELETE

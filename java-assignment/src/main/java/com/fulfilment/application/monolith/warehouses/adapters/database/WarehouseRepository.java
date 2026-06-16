@@ -4,8 +4,9 @@ import com.fulfilment.application.monolith.warehouses.domain.models.Warehouse;
 import com.fulfilment.application.monolith.warehouses.domain.ports.WarehouseStore;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-import java.util.List;
+import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @ApplicationScoped
 public class WarehouseRepository implements WarehouseStore, PanacheRepository<DbWarehouse> {
@@ -16,6 +17,7 @@ public class WarehouseRepository implements WarehouseStore, PanacheRepository<Db
   }
 
   @Override
+  @Transactional
   public void create(Warehouse warehouse) {
     DbWarehouse db = new DbWarehouse();
     db.businessUnitCode = warehouse.businessUnitCode;
@@ -27,14 +29,19 @@ public class WarehouseRepository implements WarehouseStore, PanacheRepository<Db
   }
 
   @Override
+  @Transactional
   public void update(Warehouse warehouse) {
     DbWarehouse db = find("businessUnitCode", warehouse.businessUnitCode).firstResult();
+    if (db == null) {
+      throw new IllegalArgumentException("Warehouse " + warehouse.businessUnitCode + " not found.");
+    }
     db.capacity = warehouse.capacity;
     db.stock = warehouse.stock;
     db.archivedAt = warehouse.archivedAt;
   }
 
   @Override
+  @Transactional
   public void remove(Warehouse warehouse) {
     delete("businessUnitCode", warehouse.businessUnitCode);
   }
