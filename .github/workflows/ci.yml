@@ -6,12 +6,12 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: java-assignment
     steps:
       - name: Checkout code
         uses: actions/checkout@v4.2.2
@@ -31,4 +31,4 @@ jobs:
         if: always()
         with:
           name: jacoco-report
-          path: java-assignment/target/site/jacoco/
+          path: target/site/jacoco/
