@@ -1,4 +1,4 @@
-## Status
+## CI Status
 ![CI](https://github.com/subeeshpk/fcs-interview-code-assignment-subeesh/actions/workflows/ci.yml/badge.svg)
 
 # Java Code Assignment
