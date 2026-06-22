@@ -35,8 +35,8 @@ public class WarehouseEndpointTest {
             .statusCode(200)
             .body(containsString("MWH.001"), containsString("MWH.012"), containsString("MWH.023"));
 
-    // Archive MWH.001
-    given().when().delete("warehouse/MWH.001").then().statusCode(204);
+    // Archive warehouse with id=1 (MWH.001)
+    given().when().delete("warehouse/1").then().statusCode(204);
 
     // MWH.001 no longer in active list
     given()
@@ -46,14 +46,12 @@ public class WarehouseEndpointTest {
             .body(not(containsString("MWH.001")), containsString("MWH.012"), containsString("MWH.023"));
   }
 
-  // --- NEW TESTS BELOW ---
-
   @Test
   @Order(3)
   public void testGetSingleWarehouse() {
-    // MWH.012 is still active after Order 2
+    // Warehouse with id=2 (MWH.012) is still active after Order 2
     given()
-            .when().get("warehouse/MWH.012")
+            .when().get("warehouse/2")
             .then()
             .statusCode(200)
             .body(containsString("MWH.012"));
@@ -63,7 +61,7 @@ public class WarehouseEndpointTest {
   @Order(4)
   public void testGetSingleWarehouse_notFound() {
     given()
-            .when().get("warehouse/MWH.NONE")
+            .when().get("warehouse/9999")
             .then()
             .statusCode(404);
   }
@@ -82,7 +80,7 @@ public class WarehouseEndpointTest {
             .body(body)
             .when().post("warehouse")
             .then()
-            .statusCode(200)
+            .statusCode(201)
             .body(containsString("MWH.100"));
   }
 
